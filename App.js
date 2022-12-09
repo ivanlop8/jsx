@@ -75,10 +75,10 @@ const App = () => {
       textE.search(/^[a-zA-Z0-9]+\@[a-zA-Z\_\-0-9]+\.[a-z]{2,5}$/) 
       );    
   };
-
+  
   const hasErrorsTelefon = () => { 
     return (
-      textT.search(/^[0-9]{9}$/)  
+      textT.search(/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/) 
       );    
   }; 
 
@@ -86,8 +86,8 @@ const App = () => {
     return (
     <View>
     <TextInput label="Email" value={textE} keyboardType="email-address" 
-    onChangeText={onChangeTextE}  right={<TextInput.Icon icon="check" color="green" 
-    visible={hasErrorsEmail()}/>}   
+    onChangeText={onChangeTextE}  right={<TextInput.Icon icon="check" iconColor='green' 
+    visible={!hasErrorsEmail()}/>}   
     />    
     <HelperText type="error" visible={hasErrorsEmail()}>
       Adreça email incorrecta! 
@@ -100,8 +100,8 @@ const App = () => {
     return (
     <View>
     <TextInput label="Telèfon" value={textT} keyboardType="phone-pad" 
-    onChangeText={onChangeTextT} right={<TextInput.Icon icon="check" color="green" 
-    visible={hasErrorsTelefon()}/>} 
+    onChangeText={onChangeTextT} right={<TextInput.Icon icon="check" iconColor="green" 
+    visible={!hasErrorsTelefon()}/>}  
     />     
     <HelperText type="error" visible={hasErrorsTelefon()}> 
       Telèfon incorrecte!  
@@ -127,6 +127,9 @@ const styles = StyleSheet.create({
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
+  },
+  inputIcon: {
+    color: '#42FF33', 
   },
   sectionTitle: {
     fontSize: 24,
